@@ -16,11 +16,16 @@ resource "docker_image" "nginx" {
   keep_locally = false
 }
 
+variable "internal_port" {
+  type    = number
+  default = 80
+}
+
 resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
   name  = "tutorial"
   ports {
-    internal = 80
+    internal = var.internal_port
     external = 8000
   }
 }
