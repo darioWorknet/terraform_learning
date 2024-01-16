@@ -30,4 +30,13 @@ resource "docker_container" "nginx" {
   }
 }
 
+module "mysql" {
+  source = "./mysql_module"
 
+  mysql_root_password = "xxxxxxx"
+  mysql_database_name = "test_db"
+}
+
+output "mysql_container_id" {
+  value = module.mysql.mysql_container_id
+}
